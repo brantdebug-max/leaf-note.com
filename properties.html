@@ -1,0 +1,566 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties for Sale in Zambia | Leaf-Note Real Estate</title>
+    <meta name="description" content="Browse available residential properties, commercial real estate, and plots of land for sale in Ndola, Kitwe, Lusaka, and across Zambia.">
+    <meta name="author" content="Leaf-Note Financial Services & Real Estate Ltd">
+
+    <meta property="og:title" content="Properties for Sale in Zambia | Leaf-Note">
+    <meta property="og:description" content="Find your next property with Leaf-Note. We have listings in Ndola, Kitwe, Lusaka, and more.">
+    <meta property="og:image" content="/images/properties/Logo.webp">
+    <meta property="og:url" content="https://leaf-note.com/properties">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/images/properties/Logo.webp" type="image/webp">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+260 95 586 9020</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@leaf-note.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Ndola, Zambia</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="sticky-nav" id="mainNav">
+            <div class="container">
+                <div class="nav-container">
+                    <a href="index.html" class="logo-container">
+                        <img src="/images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
+                        <div class="logo-text">
+                            <h1>Leaf-Note</h1>
+                            <p>Financial Services & Real Estate Ltd</p>
+                        </div>
+                    </a>
+
+                    <div class="nav-links">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="#services" class="nav-link">Services</a>
+                        <a href="properties.html" class="nav-link active">Properties</a> <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+
+                    <button class="mobile-menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu">
+                        <i class="fas fa-bars"></i>
+                        <span class="sr-only">Menu</span>
+                    </button>
+                </div>
+
+                <div class="mobile-menu" id="mobileMenu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="properties.html" class="nav-link active">Properties</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Our Properties</h1>
+                <p>Find your ideal plot of land or home in Zambia</p>
+            </div>
+        </section>
+
+        <section class="properties-section" id="properties">
+            <div class="container">
+                <div class="filter-container">
+                    <div class="filter-grid">
+                        <select id="filter-type" class="filter-select">
+                            <option value="">All Property Types</option>
+                            <option value="residential">Residential</option>
+                            <option value="land">Land</option>
+                        </select>
+
+                        <select id="filter-price" class="filter-select">
+                            <option value="">Any Price Range</option>
+                            <option value="0-50000">Under ZMW 50,000</option>
+                            <option value="50000-100000">ZMW 50K - 100K</option>
+                            <option value="100000-200000">ZMW 100K - 200K</option>
+                            <option value="200000-500000">ZMW 200K - 500K</option>
+                            <option value="500000+">ZMW 500K+</option>
+                        </select>
+
+                        <select id="filter-location" class="filter-select">
+                            <option value="">All Locations</option>
+                            <option value="ndola">Ndola</option>
+                            <option value="kitwe">Kitwe</option>
+                            <option value="lusaka">Lusaka</option>
+                        </select>
+
+                        <button class="btn btn-primary" onclick="filterProperties()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                    <div class="filter-results" id="filterResults">
+                        Showing <span id="visible-count">8</span> of <span id="total-count">8</span> properties
+                    </div>
+                </div>
+
+                <div class="properties-grid">
+                    <div class="property-card" data-type="land" data-price="50000" data-location="ndola">
+                        <img class="property-image" src="/images/properties/minsundu_plot.webp" alt="Minsundu Plot 20x30">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Minsundu Plot 20x30</h3>
+                                <span class="property-tag">Land</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Minsundu, Ndola</span>
+                            </div>
+                            <div class="property-price">ZMW 50,000</div>
+                            <div class="property-meta">Plot Size: 600m² • Title Deeds Available</div>
+                            <div class="property-footer">
+                                <a class="plan-link" onclick="showPaymentPlan('20x30')">View Payment Plan</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="land" data-price="60000" data-location="ndola">
+                        <img class="property-image" src="/images/properties/minsundu_plot 30x30.webp" alt="Minsundu Plot 30x30">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Minsundu Plot 30x30</h3>
+                                <span class="property-tag">Land</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Minsundu, Ndola</span>
+                            </div>
+                            <div class="property-price">ZMW 60,000</div>
+                            <div class="property-meta">Plot Size: 900m² • Cash Price</div>
+                            <div class="property-footer">
+                                <a class="plan-link" onclick="showPaymentPlan('30x30')">View Payment Plan</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="land" data-price="130000" data-location="ndola">
+                        <img class="property-image" src="/images/properties/dola-hill-plot.webp" alt="Dola Hill Plot">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Dola Hill Plot</h3>
+                                <span class="property-tag">Land</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Dola Hill, Ndola</span>
+                            </div>
+                            <div class="property-price">ZMW 130,000</div>
+                            <div class="property-meta">Plot Size: 600m² (30m x 20m)</div>
+                            <div class="property-footer">
+                                <a class="plan-link" onclick="showPaymentPlan('dola-hill')">View Payment Plan</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="residential" data-price="850000" data-location="ndola">
+                        <img class="property-image" src="/images/properties/ndola-cbd-flat.webp" alt="Flat in Ndola CBD">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Flat with Large Yard</h3>
+                                <span class="property-tag accent">For Sale</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Ndola CBD, Zambia</span>
+                            </div>
+                            <div class="property-price">Price on Application</div>
+                            <div class="property-meta">
+                                <i class="fas fa-bed"></i> 2 Beds • <i class="fas fa-bath"></i> 1 Bath • Spacious Private Yard
+                            </div>
+                            <div class="property-footer">
+                                <a href="#contact" class="plan-link">Request Viewing</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="residential" data-price="650000" data-location="kitwe">
+                        <div class="property-image placeholder">3-Bedroom House, Parklands</div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Modern Family Home</h3>
+                                <span class="property-tag accent">New Listing</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Parklands, Kitwe</span>
+                            </div>
+                            <div class="property-price">ZMW 650,000</div>
+                            <div class="property-meta">
+                                <i class="fas fa-bed"></i> 3 Beds • <i class="fas fa-bath"></i> 2 Baths • Walled with Electric Fence
+                            </div>
+                            <div class="property-footer">
+                                <a href="#contact" class="plan-link">Request Viewing</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="land" data-price="95000" data-location="kitwe">
+                        <div class="property-image placeholder">Plot of Land, Chambishi Rd</div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Commercial Plot</h3>
+                                <span class="property-tag">Land</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Chambishi Rd, Kitwe</span>
+                            </div>
+                            <div class="property-price">ZMW 95,000</div>
+                            <div class="property-meta">Plot Size: 1,200m² • Prime Road Frontage</div>
+                            <div class="property-footer">
+                                <a class="plan-link" onclick="showPaymentPlan('generic-land')">Payment Options</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="residential" data-price="1200000" data-location="lusaka">
+                        <img class="property-image" src="/images/properties/lusaka-house.webp" alt="Executive House in Lusaka">
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">Executive House</h3>
+                                <span class="property-tag">Residential</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kabulonga, Lusaka</span>
+                            </div>
+                            <div class="property-price">ZMW 1,200,000</div>
+                            <div class="property-meta">
+                                <i class="fas fa-bed"></i> 4 Beds • <i class="fas fa-bath"></i> 3 Baths • Swimming Pool
+                            </div>
+                            <div class="property-footer">
+                                <a href="#contact" class="plan-link">Request Viewing</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card" data-type="land" data-price="250000" data-location="lusaka">
+                        <div class="property-image placeholder">5-Acre Land, Lusaka West</div>
+                        <div class="property-content">
+                            <div class="property-header">
+                                <h3 class="property-title">5-Acre Smallholding</h3>
+                                <span class="property-tag">Land</span>
+                            </div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Lusaka West</span>
+                            </div>
+                            <div class="property-price">ZMW 250,000</div>
+                            <div class="property-meta">Plot Size: 5 Acres • Borehole on site</div>
+                            <div class="property-footer">
+                                <a class="plan-link" onclick="showPaymentPlan('generic-land')">Payment Options</a>
+                                <a href="#contact" class="inquire-btn">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Property Locations</h2>
+                    <p class="section-subtitle">Explore our properties across Zambia</p>
+                </div>
+                <div id="mapid">Interactive Map</div>
+            </div>
+        </section>
+
+        <section class="whatsapp-cta">
+            <div class="container">
+                <div class="whatsapp-content">
+                    <h2 class="whatsapp-title">Can't Find What You're Looking For?</h2>
+                    <p class="whatsapp-text">Let us know what you need. Our team can help you find the perfect property that matches your requirements.</p>
+                    <a href="https://wa.me/260955869020" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        Contact an Agent
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="/images/properties/Logo.webp" alt="Leaf-Note Logo" style="width:60px;height:60px;border-radius:8px;">
+                        <div class="footer-logo-text">
+                            <h3>Leaf-Note</h3>
+                            <p>Financial Services & Real Estate Ltd</p>
+                        </div>
+                    </div>
+                    <p>Your trusted partner for premium real estate solutions and financial services in Zambia.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://wa.me/260955869020" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="index.html">Home</a></li>
+                        <li class="footer-link"><a href="#services">Services</a></li>
+                        <li class="footer-link"><a href="properties.html">Properties</a></li>
+                        <li class="footer-link"><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Our Services</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><a href="#">Property Acquisition</a></li>
+                        <li class="footer-link"><a href="#">Project Financing</a></li>
+                        <li class="footer-link"><a href="#">Property Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4 class="footer-heading">Newsletter</h4>
+                    <p>Subscribe to receive property updates and market insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-button">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Leaf-Note Financial Services & Real Estate Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Payment Plan</h3>
+                <button class="modal-close" onclick="closePaymentModal()" aria-label="Close payment plan modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="plan-details-container"></div>
+
+                <div class="calculator">
+                    <h5 class="calculator-title">Calculate Monthly Payments</h5>
+                    <div class="calculator-grid">
+                        <input type="number" id="calc-price" class="calculator-input" placeholder="Price">
+                        <input type="number" id="calc-months" class="calculator-input" placeholder="Months">
+                        <div id="calc-result" class="calculator-input">ZMW 0.00</div>
+                    </div>
+                    <div class="calculator-note">
+                        Note: 10% deposit required upfront
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#contact" class="btn btn-primary" onclick="closePaymentModal()">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <script>
+        // All JavaScript from the source file, with modifications for this page.
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', () => {
+                    const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
+                    menuBtn.setAttribute('aria-expanded', !expanded);
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+
+            // Sticky navigation
+            const navbar = document.getElementById('mainNav');
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    navbar.classList.toggle('scrolled', window.scrollY > 100);
+                });
+            }
+
+            // Payment plan modal functionality
+            const paymentModal = document.getElementById('paymentModal');
+            const calcPriceInput = document.getElementById('calc-price');
+            const calcMonthsInput = document.getElementById('calc-months');
+            const resultElement = document.getElementById('calc-result');
+            const planDetailsContainer = document.getElementById('plan-details-container');
+
+            const planData = {
+                '20x30': { title: '20x30 Minsundu Plot', basePrice: 50000, options: [{ months: 6, price: 55000 }, { months: 12, price: 60000 }] },
+                '30x30': { title: '30x30 Minsundu Plot', basePrice: 60000, options: [{ months: 12, price: 65000 }, { months: 18, price: 70000 }] },
+                'dola-hill': { title: 'Dola Hill Plot', basePrice: 130000, options: [{ months: 1, price: 130000 }] },
+                'generic-land': { title: 'Land Plot', basePrice: 95000, options: [{ months: 12, price: 105000 }] }
+            };
+
+            window.showPaymentPlan = (planType) => {
+                const plan = planData[planType];
+                if (!plan) return;
+
+                let optionsHtml = `<h5>${plan.title} - Payment Options</h5>`;
+                plan.options.forEach(opt => {
+                    optionsHtml += `<div class="plan-option"><strong>${opt.months} Month Plan:</strong> ZMW ${opt.price.toLocaleString('en-ZM')}</div>`;
+                });
+                if (planDetailsContainer) planDetailsContainer.innerHTML = optionsHtml;
+
+                calcPriceInput.value = plan.basePrice;
+                calculatePayment();
+                paymentModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            window.closePaymentModal = () => {
+                paymentModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            if (paymentModal) {
+                paymentModal.addEventListener('click', (e) => {
+                    if (e.target === paymentModal) {
+                        closePaymentModal();
+                    }
+                });
+            }
+
+            function calculatePayment() {
+                if (!calcPriceInput || !calcMonthsInput || !resultElement) return;
+                const price = parseFloat(calcPriceInput.value) || 0;
+                const months = parseInt(calcMonthsInput.value) || 1;
+                const deposit = price * 0.1;
+                const monthly = (price - deposit) / months;
+                resultElement.textContent = `ZMW ${monthly.toLocaleString('en-ZM', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
+
+            if (calcPriceInput && calcMonthsInput) {
+                calcPriceInput.addEventListener('input', calculatePayment);
+                calcMonthsInput.addEventListener('input', calculatePayment);
+                calculatePayment();
+            }
+
+            // Property filtering system
+            const filterType = document.getElementById('filter-type');
+            const filterPrice = document.getElementById('filter-price');
+            const filterLocation = document.getElementById('filter-location');
+            const allCards = document.querySelectorAll('.property-card');
+            const visibleCountEl = document.getElementById('visible-count');
+            const totalCountEl = document.getElementById('total-count');
+
+            if (totalCountEl) totalCountEl.textContent = allCards.length;
+
+            window.filterProperties = () => {
+                const type = filterType.value;
+                const price = filterPrice.value;
+                const location = filterLocation.value;
+                let visibleCount = 0;
+
+                allCards.forEach(card => {
+                    const cardType = card.dataset.type;
+                    const cardPrice = parseInt(card.dataset.price);
+                    const cardLocation = card.dataset.location;
+
+                    let priceMatch = !price;
+                    if (price) {
+                        if (price.includes('+')) {
+                            const min = parseInt(price);
+                            priceMatch = cardPrice >= min;
+                        } else {
+                            const [min, max] = price.split('-').map(Number);
+                            priceMatch = cardPrice >= min && cardPrice <= max;
+                        }
+                    }
+
+                    const match = (!type || cardType === type) && (!location || cardLocation === location) && priceMatch;
+
+                    card.style.display = match ? 'flex' : 'none';
+                    if (match) visibleCount++;
+                });
+
+                if (visibleCountEl) visibleCountEl.textContent = visibleCount;
+            };
+
+            [filterType, filterPrice, filterLocation].forEach(el => {
+                if (el) el.addEventListener('change', filterProperties);
+            });
+
+            // Initial filter call
+            filterProperties();
+
+            // Leaflet.js map initialization
+            const mapElement = document.getElementById('mapid');
+            if (mapElement) {
+                const map = L.map('mapid').setView([-13.5, 28.5], 7); // Centered on Copperbelt
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                const properties = [
+                    { coords: [-12.8860, 28.6522], title: 'Minsundu Plot', plan: '20x30' },
+                    { coords: [-12.9782, 28.6414], title: 'Ndola CBD Flat', plan: 'none' },
+                    { coords: [-12.9542, 28.5857], title: 'Dola Hill Plot', plan: 'dola-hill' },
+                    // New property locations
+                    { coords: [-12.98, 28.25], title: 'Parklands House, Kitwe', plan: 'none' },
+                    { coords: [-12.8, 28.18], title: 'Chambishi Rd Plot, Kitwe', plan: 'generic-land' },
+                    { coords: [-15.39, 28.32], title: 'Kabulonga House, Lusaka', plan: 'none' },
+                    { coords: [-15.42, 28.15], title: 'Lusaka West Plot', plan: 'generic-land' }
+                ];
+
+                properties.forEach(prop => {
+                    const marker = L.marker(prop.coords).addTo(map);
+                    const popupContent = `
+                            <div style="font-family: 'Inter', sans-serif;">
+                                <h4 style="font-weight: bold; margin-bottom: 0.5rem;">${prop.title}</h4>
+                                ${prop.plan !== 'none' ? `<a href="#" onclick="showPaymentPlan('${prop.plan}')" style="color: #1d4ed8; text-decoration: none; font-weight: 600;">View Payment Plan</a>` : `<a href="#contact" style="color: #f59e0b; text-decoration: none; font-weight: 600;">Inquire</a>`}
+                            </div>
+                        `;
+                    marker.bindPopup(popupContent);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
